@@ -1,0 +1,12 @@
+# Additional System Properties
+ro.mediatek.platform=MT6853
+ro.product.device=cannong
+ro.mtk_tee_gp_support=1
+ro.mtk_microtrust_tee_support=1
+ro.mtk_soter_support=1
+ro.boot.avb_version=2.0
+ro.boot.vbmeta.avb_version=2.0
+ro.crypto.volume.filenames_mode=aes-256-cts
+ro.hardware.gatekeeper=beanpod
+ro.hardware.kmsetkey=beanpod
+persist.sys.timezone=Asia/Manila
