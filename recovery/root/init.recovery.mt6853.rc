@@ -23,7 +23,7 @@ on property:vendor.sys.listeners.registered=true
     start keymaster-4-1
     start gatekeeper-1-0
 
-service keymaster-4-1 /vendor/bin/hw/android.hardware.keymaster@4.1-service.beanpod
+service keymaster-4-1 /system/bin/hw/android.hardware.keymaster@4.1-service.beanpod
     interface android.hardware.keymaster@4.0::IKeymasterDevice default
     interface android.hardware.keymaster@4.1::IKeymasterDevice default
     user root
@@ -31,7 +31,7 @@ service keymaster-4-1 /vendor/bin/hw/android.hardware.keymaster@4.1-service.bean
     disabled
     seclabel u:r:recovery:s0
 
-service gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
+service gatekeeper-1-0 /system/bin/hw/android.hardware.gatekeeper@1.0-service
     interface android.hardware.gatekeeper@1.0::IGatekeeper default
     user root
     group root
