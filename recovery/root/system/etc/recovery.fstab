@@ -3,8 +3,28 @@
 /system                   ext4     system                                          flags=display=system;logical
 /vendor                   ext4     vendor                                          flags=display=vendor;logical
 /product                  ext4     product                                         flags=display=product;logical
-/data                     f2fs     /dev/block/by-name/userdata                     noatime,nosuid,nodev,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt wait,check,formattable,quota,reservedsize=128m,latemount,resize,checkpoint=fs,fileencryption=aes-256-xts:aes-256-cts:v1      # flags=display=data
-/misc                     emmc     /dev/block/by-name/misc                         flags=display=misc
+/metadata                 ext4     /dev/block/by-name/metadata                     flags=display=metadata
+/data                     f2fs     /dev/block/by-name/userdata                     noatime,nosuid,nodev,noauto_da_alloc,errors=panic,inlinecrypt wait,check,formattable,quota,latemount,reservedsize=128m,fileencryption=aes-256-xts      # flags=display=data
+/cache                    ext4     /dev/block/by-name/cache                        flags=display=cache
 
-#/recovery                 emmc     /dev/block/by-name/recovery                     flags=display=recovery
-#/boot                     emmc     /dev/block/by-name/boot                         flags=display=boot
+/mnt/vendor/nvdata        ext4     /dev/block/by-name/nvdata                       flags=display=nvdata
+/mnt/vendor/nvcfg         ext4     /dev/block/by-name/nvcfg                        flags=display=nvcfg
+/mnt/vendor/persist       ext4     /dev/block/by-name/persist                      flags=display=persist
+/persistent               emmc     /dev/block/by-name/frp                          flags=display=persistent
+/nvram                    emmc     /dev/block/by-name/nvram                        flags=display=nvram
+
+/misc                     emmc     /dev/block/by-name/misc                           flags=display=misc
+/recovery                 emmc     /dev/block/by-name/recovery                       flags=display=recovery
+/boot                     emmc     /dev/block/by-name/boot                           flags=display=boot
+/vbmeta_vendor            emmc     /dev/block/by-name/vbmeta_vendor                  flags=display=vbmeta_vendor
+/vbmeta_system            emmc     /dev/block/by-name/vbmeta_system                  flags=display=vbmeta_system
+
+/vbmeta                   emmc     /dev/block/by-name/vbmeta                         flags=display=vbmeta
+/system_image             emmc     /dev/block/bootdevice/by-name/system              flags=backup=1;display="System Image";flashimg=1
+/vendor_image             emmc     /dev/block/bootdevice/by-name/vendor              flags=backup=1;display="Vendor Image";flashimg=1
+/product_image            emmc     /dev/block/bootdevice/by-name/product             flags=backup=1;display="Product Image";flashimg=1
+
+/external_sd              vfat     /dev/block/mmcblk0p1         /dev/block/mmcblk0   flags=display="Micro SD Card";storage;wipeingui;removable
+/usb-otg                  vfat     /dev/block/sdd               /dev/block/sdd1      flags=display="USB OTG";storage;wipeingui;removable
+#/devices/platform/externdevice*     auto       auto        defaults        voldmanaged=sdcard1:auto,encryptable=userdata
+#/devices/platform/usb_xhci*         auto       vfat        defaults        voldmanaged=usbotg:auto
