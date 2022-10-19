@@ -9,8 +9,10 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
 
-# Inherit some common Omni stuff.
-$(call inherit-product, vendor/twrp/config/common.mk)
+# Inherit some common twrp/pb/omni stuff.
+$(call inherit-product-if-exists, vendor/twrp/config/common.mk)
+$(call inherit-product-if-exists, vendor/pbrp/config/common.mk)
+$(call inherit-product-if-exists, vendor/omni/config/common.mk)
 
 # Inherit from cannong device
 $(call inherit-product, device/xiaomi/cannong/device.mk)
