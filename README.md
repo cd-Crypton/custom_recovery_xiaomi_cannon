@@ -1,6 +1,16 @@
 # Custom Recovery Tree for Redmi Note 9T - M2007J22G (cannong)
 
-Work in progress...
+- What's working?
+  - _Flashing a .zip and/or .img._
+  - _External Memory like SDCard and USB-OTG._
+  - _File manager._
+  - _Console/command-line._
+  - _ADB Command/Sideload._
+
+- Bugs and Issues?
+  - _Internal Storage are encrypted._
+   - _Rebooting to FastbootD, will give you a recovery loop._
+
 
 | Device                  | Redmi Note 9T                                            |
 | ----------------------- | ---------------------------------------------------------|
@@ -19,10 +29,7 @@ Work in progress...
 | Front camera            | 13 MP, f/2.3, 29mm (standard), 1/3.1", 1.12µm            |
 
 ```
-#
 # Copyright (C) 2022 The Android Open Source Project
 # Copyright (C) 2022 SebaUbuntu's TWRP device tree generator
-#
 # SPDX-License-Identifier: Apache-2.0
-#
 ```
