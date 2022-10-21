@@ -20,6 +20,7 @@ $(call inherit-product-if-exists, vendor/omni/config/common.mk)
 # Inherit from cannong device
 $(call inherit-product, device/xiaomi/cannong/device.mk)
 
+PRODUCT_RELEASE_NAME := cannong
 PRODUCT_DEVICE := cannong
 PRODUCT_NAME := twrp_cannong
 PRODUCT_BRAND := Redmi
