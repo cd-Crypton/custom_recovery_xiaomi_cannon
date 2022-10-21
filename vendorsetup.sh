@@ -35,6 +35,7 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	
 	# Device
 	export FOX_VARIANT="A12"
+	export FOX_ARCH=arm64
 
 	# Funtions
 	export FOX_REPLACE_BUSYBOX_PS=1
