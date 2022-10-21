@@ -32,6 +32,9 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export OF_MAINTAINER=cd-Spidey
 	export FOX_VERSION=$(date +%y.%m.%d)
 	export FOX_BUILD_TYPE=Unofficial-Beta
+	
+	# Device
+	export FOX_VARIANT="A12"
 
 	# Funtions
 	export FOX_REPLACE_BUSYBOX_PS=1
