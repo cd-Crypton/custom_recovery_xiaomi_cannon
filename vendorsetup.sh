@@ -98,7 +98,7 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	#  Disable Built-in Magisk
 	export FOX_DELETE_MAGISK_ADDON=0
 	# Magisk Zip (25.2)
-        export FOX_USE_SPECIFIC_MAGISK_ZIP="$PWD/device/xiaomi/cannon/addon/Magiskv25.2.zip"
+        export FOX_USE_SPECIFIC_MAGISK_ZIP="$PWD/device/xiaomi/cannon/addon/Magisk-v25.2.zip"
 	# Magisk Version
 	export MAGISK_VER=25.2
 	# Magisk Boot Patch
