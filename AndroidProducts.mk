@@ -6,7 +6,7 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/twrp_cannong.mk
+    $(LOCAL_DIR)/omni_cannong.mk
 
 COMMON_LUNCH_CHOICES := \
-    twrp_cannong-eng
+    omni_cannong-eng
