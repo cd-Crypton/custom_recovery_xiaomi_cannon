@@ -9,7 +9,8 @@ on init
     export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
 
 on fs
-    install_keyring #Install Keyring for decryption purposes
+    install_keyring
+    setprop crypto.ready 1
 
 on post-fs
     start boot-hal-1-1
@@ -22,6 +23,19 @@ on boot
 on property:vendor.sys.listeners.registered=true
     start keymaster-4-1
     start gatekeeper-1-0
+
+service keystore_auth /system/bin/keystore_auth
+    oneshot
+    user system
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+service keystore /system/bin/keystore /tmp/misc/keystore
+    user root
+    group root drmrpc readproc
+    disabled
+    seclabel u:r:recovery:s0
 
 service keymaster-4-1 /system/bin/android.hardware.keymaster@4.1-service.beanpod
     interface android.hardware.keymaster@4.0::IKeymasterDevice default
