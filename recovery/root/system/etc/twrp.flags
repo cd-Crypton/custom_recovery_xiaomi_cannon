@@ -1,15 +1,10 @@
 # Mount Point             FSType   Device1                Device2                  Flags
 
-/system                   ext4     system                                          flags=display=system;logical
-/vendor                   ext4     vendor                                          flags=display=vendor;logical
-/product                  ext4     product                                         flags=display=product;logical
 /metadata                 ext4     /dev/block/by-name/metadata                     flags=display=metadata
-/data                     f2fs     /dev/block/by-name/userdata                     noatime,nosuid,nodev,noauto_da_alloc,errors=panic,inlinecrypt wait,check,formattable,quota,latemount,reservedsize=128m,fileencryption=aes-256-xts      # flags=display=data
-/cache                    ext4     /dev/block/by-name/cache                        flags=display=cache
 
-/mnt/vendor/nvdata        ext4     /dev/block/by-name/nvdata                       flags=display=nvdata
-/mnt/vendor/nvcfg         ext4     /dev/block/by-name/nvcfg                        flags=display=nvcfg
-/mnt/vendor/persist       ext4     /dev/block/by-name/persist                      flags=display=persist
+/nvdata                   ext4     /dev/block/by-name/nvdata                       flags=display=nvdata
+/nvcfg                    ext4     /dev/block/by-name/nvcfg                        flags=display=nvcfg
+/persist                  ext4     /dev/block/by-name/persist                      flags=display=persist
 /persistent               emmc     /dev/block/by-name/frp                          flags=display=persistent
 /nvram                    emmc     /dev/block/by-name/nvram                        flags=display=nvram
 
