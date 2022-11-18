@@ -8,7 +8,6 @@
 /persistent               emmc     /dev/block/by-name/frp                          flags=display=persistent
 /nvram                    emmc     /dev/block/by-name/nvram                        flags=display=nvram
 
-/misc                     emmc     /dev/block/by-name/misc                           flags=display=misc
 /recovery                 emmc     /dev/block/by-name/recovery                       flags=display=recovery
 /boot                     emmc     /dev/block/by-name/boot                           flags=display=boot
 /vbmeta_vendor            emmc     /dev/block/by-name/vbmeta_vendor                  flags=display=vbmeta_vendor
