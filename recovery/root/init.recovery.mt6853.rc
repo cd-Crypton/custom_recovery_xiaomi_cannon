@@ -1,11 +1,11 @@
 # MT6853, remove unncessary supports
 
-import /init.recovery.teei_daemon.rc
+import /microtrust.rc
 
 on init
     symlink /dev/block/platform/bootdevice /dev/block/bootdevice
     mkdir /mnt/vendor/persist 0700 root root
-    mount ext4 /dev/block/platform/bootdevice/by-name/persist /mnt/vendor/persist
+    mount ext4 /dev/block/platform/bootdevice/by-name/persist /persist
     export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
 
 on fs
