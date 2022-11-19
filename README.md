@@ -2,14 +2,16 @@
 
 - What's working?
   - _Flashing a .zip and/or .img._
-  - _External Memory like SDCard and USB-OTG._
+  - _External SD Card._
   - _File manager._
   - _Console/command-line._
   - _ADB Command/Sideload._
 
 - Bugs and Issues?
   - _Internal Storage are encrypted._
-   - _Rebooting to FastbootD, will give you a recovery loop._
+  - _Rebooting to FastbootD, will give you a recovery loop._
+  - _USB OTG_
+  - _Vibration/Haptics_ 
 
 
 | Device                  | Redmi Note 9T                                            |
