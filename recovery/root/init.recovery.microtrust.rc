@@ -28,11 +28,11 @@ service teei_daemon /vendor/bin/teei_daemon \
     seclabel u:r:recovery:s0
 
 on boot
-    chown system system /sys/bus/platform/devices/utos/dcih_notify_test
-    chown system system /sys/bus/platform/devices/utos/dcih_wait_notify_test
-    chown system system /sys/bus/platform/devices/utos/load_ut_drv
-    chown system system /sys/bus/platform/devices/utos/unload_ut_drv
-    chown system system /sys/bus/platform/devices/utos/notify_ree_dci_handler
+    chown root root /sys/bus/platform/devices/utos/dcih_notify_test
+    chown root root /sys/bus/platform/devices/utos/dcih_wait_notify_test
+    chown root root /sys/bus/platform/devices/utos/load_ut_drv
+    chown root root /sys/bus/platform/devices/utos/unload_ut_drv
+    chown root root /sys/bus/platform/devices/utos/notify_ree_dci_handler
 
 # Others
 on post-fs-data
@@ -61,63 +61,63 @@ on post-fs-data
     mkdir /data/vendor/thh/tee_log
     mkdir /data/vendor/key_provisioning
     chmod 0755 /data/vendor/thh
-    chown system system /data/vendor/thh
+    chown root root /data/vendor/thh
     chmod 0755 /data/vendor/thh/tee_00
-    chown system system /data/vendor/thh/tee_00
+    chown root root /data/vendor/thh/tee_00
     chmod 0755 /data/vendor/thh/tee_01
-    chown system system /data/vendor/thh/tee_01
+    chown root root /data/vendor/thh/tee_01
     chmod 0755 /data/vendor/thh/tee_02
-    chown system system /data/vendor/thh/tee_02
+    chown root root /data/vendor/thh/tee_02
     chmod 0755 /data/vendor/thh/tee_03
-    chown system system /data/vendor/thh/tee_03
+    chown root root/data/vendor/thh/tee_03
     chmod 0755 /data/vendor/thh/tee_04
-    chown system system /data/vendor/thh/tee_04
+    chown root root /data/vendor/thh/tee_04
     chmod 0755 /data/vendor/thh/tee_05
-    chown system system /data/vendor/thh/tee_05
+    chown root root /data/vendor/thh/tee_05
 
     chmod 0755 /data/vendor/thh/tee_06
-    chown system system /data/vendor/thh/tee_06
+    chown root root /data/vendor/thh/tee_06
     chmod 0755 /data/vendor/thh/tee_07
-    chown system system /data/vendor/thh/tee_07
+    chown root root /data/vendor/thh/tee_07
     chmod 0755 /data/vendor/thh/tee
-    chown system system /data/vendor/thh/tee
+    chown root root /data/vendor/thh/tee
     chmod 0755 /data/vendor/thh/tee/tas
-    chown system system /data/vendor/thh/tee/tas
+    chown root root /data/vendor/thh/tee/tas
     chmod 0755 /data/vendor/thh/tee_08
-    chown system system /data/vendor/thh/tee_08
+    chown root root /data/vendor/thh/tee_08
     chmod 0755 /data/vendor/thh/tee_09
-    chown system system /data/vendor/thh/tee_09
+    chown root root /data/vendor/thh/tee_09
     chmod 0755 /data/vendor/thh/tee_0A
-    chown system system /data/vendor/thh/tee_0A
+    chown root root /data/vendor/thh/tee_0A
     chmod 0755 /data/vendor/thh/tee_0B
     chown system system /data/vendor/thh/tee_0B
     chmod 0755 /data/vendor/thh/tee_0C
-    chown system system /data/vendor/thh/tee_0C
+    chown root root /data/vendor/thh/tee_0C
     chmod 0755 /data/vendor/thh/tee_0D
-    chown system system /data/vendor/thh/tee_0D
+    chown root root /data/vendor/thh/tee_0D
     chmod 0755 /data/vendor/thh/tee_0E
-    chown system system /data/vendor/thh/tee_0E
+    chown root root /data/vendor/thh/tee_0E
     chmod 0755 /data/vendor/thh/tee_0F
-    chown system system /data/vendor/thh/tee_0F
+    chown root root /data/vendor/thh/tee_0F
     chmod 0755 /data/vendor/thh/tee_log
-    chown system system /data/vendor/thh/tee_log
+    chown root root /data/vendor/thh/tee_log
     chmod 0755 /data/vendor/thh/ta
-    chown system system /data/vendor/thh/ta
+    chown root root /data/vendor/thh/ta
     chmod 0755 /data/vendor/thh/system
-    chown system system /data/vendor/thh/system
+    chown root root /data/vendor/thh/system
     restorecon_recursive /data/vendor/thh
     chmod 0771 /data/vendor/key_provisioning
-    chown system system /data/vendor/key_provisioning
+    chown root root /data/vendor/key_provisioning
     write /proc/bootprof "start teei cfg end (on post-fs-data)"
 
 on post-fs
     # Set /mnt/vendor/persist/rpmb
-    chown system system /mnt/vendor/persist
+    chown root root /mnt/vendor/persist
     chmod 0771 /mnt/vendor/persist
     restorecon_recursive /mnt/vendor/persist
 
     mkdir /mnt/vendor/persist/rpmb
-    chown system system /mnt/vendor/persist/rpmb
+    chown root root /mnt/vendor/persist/rpmb
     chmod 0771 /mnt/vendor/persist/rpmb
     restorecon_recursive /mnt/vendor/persist/rpmb
 
@@ -126,34 +126,34 @@ on post-fs
     mkdir /vendor/persist/rpmb
     chmod 0771 /persist/rpmb
     chmod 0771 /vendor/persist/rpmb
-    chown system system /persist/rpmb
-    chown system system /vendor/persist/rpmb
+    chown root root /persist/rpmb
+    chown root root /vendor/persist/rpmb
     restorecon_recursive /persist
     restorecon_recursive /vendor/persist
 
 on fs
     chmod 0660 /dev/teei_client
-    chown system system /dev/teei_client
+    chown root root/dev/teei_client
     chmod 0660 /dev/teei_config
-    chown system system /dev/teei_config
+    chown root root /dev/teei_config
     # 666 for SVP
     chmod 0666 /dev/isee_tee0
-    chown system drmrpc /dev/isee_tee0
+    chown root drmrpc /dev/isee_tee0
     chmod 0660 /dev/tz_vfs
-    chown system system /dev/tz_vfs
+    chown root root /dev/tz_vfs
     chmod 0660 /dev/teei_fp
-    chown system /dev/teei_fp
-    chown system drmrpc /dev/ut_keymaster
+    chown root /dev/teei_fp
+    chown root drmrpc /dev/ut_keymaster
     chmod 0660 /dev/ut_keymaster
     # rpmb device
     chmod 0660 /dev/rpmb0
-    chown system system /dev/rpmb0
+    chown root root /dev/rpmb0
     chmod 0660 /dev/mmcblk0rpmb
-    chown root system /dev/mmcblk0rpmb
+    chown root root /dev/mmcblk0rpmb
     # legacy rpmb device for cross-platform compatibility
     chmod 0660 /dev/emmcrpmb0
-    chown system system /dev/emmcrpmb0
-    chown system system /dev/utr_tui
+    chown root root /dev/emmcrpmb0
+    chown root root /dev/utr_tui
     chmod 0660 /dev/utr_tui
     write /proc/bootprof "start teei_daemon (on fs)"
     start teei_daemon
