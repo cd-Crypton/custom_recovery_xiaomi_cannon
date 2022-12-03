@@ -153,7 +153,22 @@ jobs:
       id: props
       run: |
         echo "date=$(date +%Y%m%d)" >> $GITHUB_OUTPUT
-      
+
+    - name: Clone Template
+      run: |
+        git clone https://github.com/cd-Spidey/Random.git ./randomfiles
+
+    - name: Copy Files
+      run: |
+        cd out/target/product/${{ github.event.inputs.DEVICE_NAME }}
+        cp ${{ github.event.inputs.BUILD_TARGET }}.img ${GITHUB_WORKSPACE}/randomfiles/twrp_atemplate
+      working-directory: ${{ steps.pwd.outputs.workdir }}
+
+    - name: Zip Files
+      run: |
+        cd randomfiles/twrp_atemplate
+        zip -rv twrp-v3.7.0_12.1-v000-${{ github.event.inputs.DEVICE_NAME }}-${{ steps.props.outputs.date }}.zip recovery.img META-INF/
+
     - name: Renaming into TWRP
       run: |
         cd out/target/product/${{ github.event.inputs.DEVICE_NAME }}
@@ -164,15 +179,19 @@ jobs:
     - name: Upload to Release
       uses: ncipollo/release-action@v1.11.1
       with:
-        artifacts: workspace/out/target/product/${{ github.event.inputs.DEVICE_NAME }}/twrp*.img
+        artifacts: |
+          workspace/out/target/product/${{ github.event.inputs.DEVICE_NAME }}/twrp*.img
+          randomfiles/twrp_abtemplate/twrp*.zip
         name: Unofficial TWRP for ${{ github.event.inputs.DEVICE_NAME }} - Build ${{ steps.props.outputs.date }} / ${{ github.run_id }}
         draft: false
         prerelease: true
         tag: ${{ github.run_id }}-${{ steps.props.outputs.date }}
         token: ${{ secrets.GITHUB_TOKEN }}
         body: |
-          Device: ${{ github.event.inputs.DEVICE_NAME }}
-          Manifest: ${{ github.event.inputs.MANIFEST_URL }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}
+          ## TWRP v3.7.0_12.1-cannong-${{ steps.props.outputs.date }}
+          - To be edited
+          - To be edited.
+          - To be edited. 
 
     - name: Link of Release
       run: |
