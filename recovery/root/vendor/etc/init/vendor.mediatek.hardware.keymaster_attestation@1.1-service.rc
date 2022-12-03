@@ -1,8 +1,7 @@
 service keymaster_attestation-1-1 /vendor/bin/hw/vendor.mediatek.hardware.keymaster_attestation@1.1-service
-    interface vendor.mediatek.hardware.keymaster_attestation@1.0::IKeymasterDevice default
-    interface vendor.mediatek.hardware.keymaster_attestation@1.1::IKeymasterDevice default
     class hal
     user root
     group root
+    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/system/lib64:/system/lib:/sbin
     disabled
     seclabel u:r:recovery:s0

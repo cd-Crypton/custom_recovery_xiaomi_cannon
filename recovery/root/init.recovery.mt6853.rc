@@ -20,10 +20,16 @@ on boot
     start health-hal-2-1
     setprop sys.usb.config adb
 
+on property:crypto.ready=1 && property:hwservicemanager.ready=true
+    start teei_daemon
+
+on property:sys.listeners.registered=true
+    start keymaster-4-1-beanpod
+    start gatekeeper-1-0
+
 on property:vendor.sys.listeners.registered=true
     start keymaster-4-1-beanpod
     start gatekeeper-1-0
-    start teei_daemon
 
 service keystore_auth /system/bin/keystore_auth
     oneshot
@@ -39,18 +45,19 @@ service keystore /system/bin/keystore /tmp/misc/keystore
     seclabel u:r:recovery:s0
 
 service keymaster-4-1-beanpod /system/bin/android.hardware.keymaster@4.1-service.beanpod
-    interface android.hardware.keymaster@4.0::IKeymasterDevice default
-    interface android.hardware.keymaster@4.1::IKeymasterDevice default
     user root
     group root drmrpc
+    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/system/lib64:/system/lib:/sbin
     disabled
+    oneshot
     seclabel u:r:recovery:s0
 
 service gatekeeper-1-0 /system/bin/android.hardware.gatekeeper@1.0-service
-    interface android.hardware.gatekeeper@1.0::IGatekeeper default
     user root
     group root
+    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/system/lib64:/system/lib:/sbin
     disabled
+    oneshot
     seclabel u:r:recovery:s0
 
 on property:hwservicemanager.ready=true
