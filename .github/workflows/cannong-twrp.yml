@@ -181,7 +181,7 @@ jobs:
       with:
         artifacts: |
           workspace/out/target/product/${{ github.event.inputs.DEVICE_NAME }}/twrp*.img
-          randomfiles/twrp_abtemplate/twrp*.zip
+          randomfiles/twrp_atemplate/twrp*.zip
         name: Unofficial TWRP for ${{ github.event.inputs.DEVICE_NAME }} - Build ${{ steps.props.outputs.date }} / ${{ github.run_id }}
         draft: false
         prerelease: true
