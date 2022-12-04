@@ -26,10 +26,14 @@ on property:crypto.ready=1 && property:hwservicemanager.ready=true
 on property:sys.listeners.registered=true
     start keymaster-4-1-beanpod
     start gatekeeper-1-0
+    start keymaster_attestation-1-1
+    start thh-2-0
 
 on property:vendor.sys.listeners.registered=true
     start keymaster-4-1-beanpod
     start gatekeeper-1-0
+    start keymaster_attestation-1-1
+    start thh-2-0
 
 service keystore_auth /system/bin/keystore_auth
     oneshot
@@ -49,7 +53,6 @@ service keymaster-4-1-beanpod /system/bin/android.hardware.keymaster@4.1-service
     group root drmrpc
     setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/system/lib64:/system/lib:/sbin
     disabled
-    oneshot
     seclabel u:r:recovery:s0
 
 service gatekeeper-1-0 /system/bin/android.hardware.gatekeeper@1.0-service
@@ -57,12 +60,27 @@ service gatekeeper-1-0 /system/bin/android.hardware.gatekeeper@1.0-service
     group root
     setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/system/lib64:/system/lib:/sbin
     disabled
-    oneshot
+    seclabel u:r:recovery:s0
+
+service keymaster_attestation-1-1 /vendor/bin/hw/vendor.mediatek.hardware.keymaster_attestation@1.1-service
+    user root
+    group root
+    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/system/lib64:/system/lib:/sbin
+    disabled
+    seclabel u:r:recovery:s0
+
+service thh-2-0 /vendor/bin/hw/vendor.microtrust.hardware.thh@2.0-service
+    user root
+    group root
+    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/system/lib64:/system/lib:/sbin
+    disabled
     seclabel u:r:recovery:s0
 
 on property:hwservicemanager.ready=true
     start keymaster-4-1-beanpod
     start gatekeeper-1-0
+    start keymaster_attestation-1-1
+    start thh-2-0
 
 on property:ro.crypto.state=unsupported
     stop teei_daemon
