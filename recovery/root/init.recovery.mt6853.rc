@@ -8,10 +8,6 @@ on init
     mount ext4 /dev/block/platform/bootdevice/by-name/persist /persist
     export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
 
-on fs
-    install_keyring
-    setprop crypto.ready 1
-
 on post-fs
     start boot-hal-1-1
     
@@ -20,16 +16,13 @@ on boot
     start health-hal-2-1
     setprop sys.usb.config adb
 
+on property:ro.crypto.state=encrypted && property:ro.crypto.type=file
+    install_keyring
+
 on property:crypto.ready=1 && property:hwservicemanager.ready=true
     start teei_daemon
 
-on property:sys.listeners.registered=true
-    start keymaster-4-1-beanpod
-    start gatekeeper-1-0
-    start keymaster_attestation-1-1
-    start thh-2-0
-
-on property:vendor.sys.listeners.registered=true
+on property:sys.listeners.registered=true && property:vendor.sys.listeners.registered=true
     start keymaster-4-1-beanpod
     start gatekeeper-1-0
     start keymaster_attestation-1-1
@@ -37,7 +30,7 @@ on property:vendor.sys.listeners.registered=true
 
 service keystore_auth /system/bin/keystore_auth
     oneshot
-    user system
+    user root
     group root
     disabled
     seclabel u:r:recovery:s0

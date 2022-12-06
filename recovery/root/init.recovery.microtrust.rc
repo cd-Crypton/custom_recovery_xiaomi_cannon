@@ -26,7 +26,6 @@ service teei_daemon /vendor/bin/teei_daemon \
     group root
     setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/system/lib64:/system/lib:/sbin
     disabled
-    oneshot
     seclabel u:r:recovery:s0
 
 on boot
