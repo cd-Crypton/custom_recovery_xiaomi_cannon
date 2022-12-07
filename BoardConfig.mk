@@ -1,6 +1,5 @@
 # Copyright (C) 2022 The Android Open Source Project
 # Copyright (C) 2022 SebaUbuntu's TWRP device tree generator
-#
 # SPDX-License-Identifier: Apache-2.0
 
 DEVICE_PATH := device/xiaomi/cannong
@@ -25,9 +24,6 @@ TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a55
 # Bootloader
 TARGET_NO_BOOTLOADER := true
 
-# Assert
-TARGET_OTA_ASSERT_DEVICE := cannon,cannong,cannong_global
-
 # File System
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 134217728
@@ -42,10 +38,8 @@ BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_COPY_OUT_VENDOR := vendor
 TARGET_COPY_OUT_PRODUCT := product
 
-# Bootimg Header
-BOARD_BOOTIMG_HEADER_VERSION := 2
-
 # Kernel
+BOARD_BOOTIMG_HEADER_VERSION := 2
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2
 BOARD_KERNEL_BASE := 0x40078000
 BOARD_KERNEL_PAGESIZE := 2048
@@ -111,7 +105,7 @@ TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
 # Hack: prevent anti rollback
 PLATFORM_SECURITY_PATCH := 2099-12-31
 VENDOR_SECURITY_PATCH := 2099-12-31
-PLATFORM_VERSION := 99.87.36
+PLATFORM_VERSION := 16.1.0
 
 # TWRP Configuration
 TW_THEME := portrait_hdpi
@@ -131,7 +125,6 @@ TW_INCLUDE_FASTBOOTD := true
 TW_USE_FSCRYPT_POLICY := 1
 BOARD_SUPPRESS_SECURE_ERASE := true
 TARGET_USES_MKE2FS := true
-TARGET_SUPPORTS_64_BIT_APPS := false
 LC_ALL="C"
 TW_DEVICE_VERSION := cd-Spidey
 
@@ -142,7 +135,7 @@ TARGET_USES_LOGD := true
 # SHRP Configuration
 SHRP_MAINTAINER := cd-Spidey
 SHRP_DEVICE_CODE := cannong
-SHRP_PATH := device/xiaomi/cannong
+SHRP_PATH := $(DEVICE_PATH)
 SHRP_REC_TYPE := Treble
 SHRP_DEVICE_TYPE := A_Only
 SHRP_NOTCH := true
