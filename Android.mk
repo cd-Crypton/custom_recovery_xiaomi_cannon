@@ -10,7 +10,3 @@ LOCAL_PATH := $(call my-dir)
 ifeq ($(TARGET_DEVICE),cannong)
 include $(call all-subdir-makefiles,$(LOCAL_PATH))
 endif
-
-ifeq ($(TW_INCLUDE_FASTBOOTD), true)
-    LOCAL_CFLAGS += -DTW_INCLUDE_FASTBOOTD
-endif
