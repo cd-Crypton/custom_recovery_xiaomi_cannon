@@ -26,7 +26,7 @@ TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a55
 TARGET_NO_BOOTLOADER := true
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := cannon,cannong
+TARGET_OTA_ASSERT_DEVICE := cannon,cannong,cannong_global
 
 # File System
 BOARD_HAS_LARGE_FILESYSTEM := true
@@ -101,16 +101,10 @@ TARGET_VENDOR_PROP := $(DEVICE_PATH)/vendor.prop
 
 # Additional binaries & libraries needed for recovery
 TARGET_RECOVERY_DEVICE_MODULES += \
-    libkeymaster4 \
-    libkeymaster4support \
-    libpuresoftkeymasterdevice \
     ashmemd_aidl_interface-cpp \
     libashmemd_client
 
 TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
-    $(TARGET_OUT_SHARED_LIBRARIES)/libkeymaster4.so \
-    $(TARGET_OUT_SHARED_LIBRARIES)/libkeymaster4support.so \
-    $(TARGET_OUT_SHARED_LIBRARIES)/libpuresoftkeymasterdevice.so \
     $(TARGET_OUT_SHARED_LIBRARIES)/ashmemd_aidl_interface-cpp.so \
     $(TARGET_OUT_SHARED_LIBRARIES)/libashmemd_client.so
 
@@ -121,13 +115,10 @@ PLATFORM_VERSION := 99.87.36
 
 # TWRP Configuration
 TW_THEME := portrait_hdpi
-#TW_Y_OFFSET := 100
-#TW_H_OFFSET := -100
 RECOVERY_SDCARD_ON_DATA := true
 TW_INCLUDE_RESETPROP := true
 TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_CRYPTO_FBE := true
-TW_INCLUDE_FBE_METADATA_DECRYPT := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_EXTRA_LANGUAGES := true
 TW_INCLUDE_NTFS_3G := true
@@ -137,7 +128,7 @@ TW_DEFAULT_BRIGHTNESS := 900
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_INCLUDE_FUSE_EXFAT := true
 TW_INCLUDE_FASTBOOTD := true
-TW_USE_FSCRYPT_POLICY := 2
+TW_USE_FSCRYPT_POLICY := 1
 BOARD_SUPPRESS_SECURE_ERASE := true
 TARGET_USES_MKE2FS := true
 TARGET_SUPPORTS_64_BIT_APPS := false
