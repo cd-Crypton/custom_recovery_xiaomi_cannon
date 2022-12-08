@@ -9,10 +9,9 @@ PRODUCT_MODEL := Redmi Note 9T
 PRODUCT_MANUFACTURER := xiaomi
 PRODUCT_RELEASE_NAME := $(PRODUCT_DEVICE)
 
-DEVICE_PATH := device/$(PRODUCT_MANUFCATURER)/$(PRODUCT_DEVICE)
 
 # Inherit from the Device Tree itself.
-$(call inherit-product, $(DEVICE_PATH)/device.mk)
+$(call inherit-product, device/xiaomi/cannong/device.mk)
 
 # Inherit from Prebuilt Products.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
