@@ -30,6 +30,6 @@ $(call inherit-product-if-exists, vendor/omni/config/common.mk)
 PRODUCT_GMS_CLIENTID_BASE := android-$(PRODUCT_MANUFCATURER)
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRIVATE_BUILD_DESC="$(PRODUCT_DEVICE)-user 12 SP1A.210812.016 V13.0.2.0.SJEMIXM release-keys"
+    PRIVATE_BUILD_DESC="cannong-user 12 SP1A.210812.016 V13.0.2.0.SJEMIXM release-keys"
 
-BUILD_FINGERPRINT := $(PRODUCT_BRAND)/$(PRODUCT_DEVICE)/$(PRODUCT_DEVICE):12/SP1A.210812.016/V13.0.2.0.SJEMIXM:user/release-keys
+BUILD_FINGERPRINT := redmi/cannong_global/cannong:12/SP1A.210812.016/V13.0.2.0.SJEMIXM:user/release-keys
