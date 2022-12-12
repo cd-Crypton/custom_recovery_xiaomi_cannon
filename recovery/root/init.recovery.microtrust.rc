@@ -24,7 +24,7 @@ service teei_daemon /vendor/bin/teei_daemon \
     -t 09010000000000000000000000000000
     user root
     group root
-    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/system/lib64:/system/lib:/sbin
+    setenv LD_LIBRARY_PATH /vendor/thh/ta:/vendor/thh:/vendor
     disabled
     seclabel u:r:recovery:s0
 

@@ -20,19 +20,27 @@ on boot
     setprop sys.usb.config adb
 
 on property:ro.crypto.state=encrypted && property:ro.crypto.type=file
-    start keymaster-4-1-beanpod
-    start gatekeeper-1-0
-    start keymaster_attestation-1-1
-    start thh-2-0
-
-on property:crypto.ready=1 && property:hwservicemanager.ready=true
+    install_keyring
     start teei_daemon
+    setprop crypto.ready 1
 
 on property:sys.listeners.registered=true && property:vendor.sys.listeners.registered=true
-    start keymaster-4-1-beanpod
-    start gatekeeper-1-0
+    start teei_daemon
+    start keymaster-4-1-beanpo
     start keymaster_attestation-1-1
+    start vendor.gatekeeper-1-0
     start thh-2-0
+    start soter-1-0
+    start vendor.secure_element
+
+on property:hwservicemanager.ready=true && property:crypto.ready=1
+    start teei_daemon
+    start keymaster-4-1-beanpo
+    start keymaster_attestation-1-1
+    start vendor.gatekeeper-1-0
+    start thh-2-0
+    start soter-1-0
+    start vendor.secure_element
 
 service keystore_auth /system/bin/keystore_auth
     oneshot
@@ -48,6 +56,8 @@ service keystore /system/bin/keystore /tmp/misc/keystore
     seclabel u:r:recovery:s0
 
 service keymaster-4-1-beanpod /system/bin/android.hardware.keymaster@4.1-service.beanpod
+    interface android.hardware.keymaster@4.0::IKeymasterDevice default
+    interface android.hardware.keymaster@4.1::IKeymasterDevice default
     user root
     group root drmrpc
     setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/system/lib64:/system/lib:/sbin
@@ -55,49 +65,27 @@ service keymaster-4-1-beanpod /system/bin/android.hardware.keymaster@4.1-service
     seclabel u:r:recovery:s0
 
 service gatekeeper-1-0 /system/bin/android.hardware.gatekeeper@1.0-service
+    interface android.hardware.gatekeeper@1.0::IGatekeeper default
     user root
     group root
     setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/system/lib64:/system/lib:/sbin
     disabled
     seclabel u:r:recovery:s0
 
-service keymaster_attestation-1-1 /vendor/bin/hw/vendor.mediatek.hardware.keymaster_attestation@1.1-service
-    user root
-    group root
-    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/system/lib64:/system/lib:/sbin
-    disabled
-    seclabel u:r:recovery:s0
-
-service thh-2-0 /vendor/bin/hw/vendor.microtrust.hardware.thh@2.0-service
-    user root
-    group root
-    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/system/lib64:/system/lib:/sbin
-    disabled
-    seclabel u:r:recovery:s0
-
-on property:hwservicemanager.ready=true
-    start keymaster-4-1-beanpod
-    start gatekeeper-1-0
-    start keymaster_attestation-1-1
-    start thh-2-0
-
-on property:ro.crypto.state=unsupported
+on property:enable.fbe.service=0
     stop teei_daemon
-    stop keymaster-4-1-beanpod
-    stop gatekeeper-1-0
-    stop servicemanager
-    stop hwservicemanager
+    stop keymaster-4-1-beanpo
+    stop keymaster_attestation-1-1
+    stop vendor.gatekeeper-1-0
+    stop thh-2-0
+    stop soter-1-0
+    stop vendor.secure_element
 
-on property:ro.crypto.state=unencrypted
+on property:twrp.all.users.decrypted=true
     stop teei_daemon
-    stop keymaster-4-1-beanpod
-    stop gatekeeper-1-0
-    stop servicemanager
-    stop hwservicemanager
-
-on property:twrp.decrypt.done=true
-    stop teei_daemon
-    stop keymaster-4-1-beanpod
-    stop gatekeeper-1-0
-    stop servicemanager
-    stop hwservicemanager
+    stop keymaster-4-1-beanpo
+    stop keymaster_attestation-1-1
+    stop vendor.gatekeeper-1-0
+    stop thh-2-0
+    stop soter-1-0
+    stop vendor.secure_element
