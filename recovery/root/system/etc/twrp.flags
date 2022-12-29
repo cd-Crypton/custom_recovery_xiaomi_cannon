@@ -1,7 +1,4 @@
 # Mount Point             FSType   Device1                Device2                  Flags
-
-/metadata                 ext4     /dev/block/by-name/metadata                     flags=display=metadata
-
 /nvdata                   ext4     /dev/block/by-name/nvdata                       flags=backup=1
 /nvcfg                    ext4     /dev/block/by-name/nvcfg   
 /persist                  ext4     /dev/block/by-name/persist 
