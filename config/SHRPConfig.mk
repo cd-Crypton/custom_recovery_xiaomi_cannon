@@ -1,0 +1,48 @@
+# Include to BoardConfig.mk
+SHRP_MAINTAINER := cd-Spidey
+SHRP_DEVICE_CODE := cannong
+SHRP_PATH := device/xiaomi/cannong
+SHRP_REC_TYPE := Treble
+SHRP_DEVICE_TYPE := A_Only
+SHRP_NOTCH := true
+SHRP_EDL_MODE := 1
+SHRP_EXTERNAL := /external_sd
+SHRP_INTERNAL := /sdcard
+SHRP_OTG := /usb_otg
+SHRP_FLASH := 1
+SHRP_DARK := true
+SHRP_REC := /dev/block/bootdevice/by-name/recovery
+SHRP_EXPRESS := true
+SHRP_EXTERNAL_ADDON_PATH := "$(SHRP_PATH)/addon/"
+
+# SHRP Addon 1
+SHRP_INC_IN_REC_EXTERNAL_ADDON_1 := true
+SHRP_EXTERNAL_ADDON_1_NAME := "SELinux Permissiver"
+SHRP_EXTERNAL_ADDON_1_INFO := "Makes SELinux Permissive"
+SHRP_EXTERNAL_ADDON_1_FILENAME := "permissiver.zip"
+SHRP_EXTERNAL_ADDON_1_BTN_TEXT := "Flash"
+SHRP_EXTERNAL_ADDON_1_SUCCESSFUL_TEXT := "Flashed Successfully"
+
+# SHRP Addon 2
+SHRP_INC_IN_REC_EXTERNAL_ADDON_2 := true
+SHRP_EXTERNAL_ADDON_2_NAME := "SELinux Enforcer"
+SHRP_EXTERNAL_ADDON_2_INFO := "Reverts Back to Enforcing SELinux"
+SHRP_EXTERNAL_ADDON_2_FILENAME := "enforcer.zip"
+SHRP_EXTERNAL_ADDON_2_BTN_TEXT := "Flash"
+SHRP_EXTERNAL_ADDON_2_SUCCESSFUL_TEXT := "Flashed Successfully"
+
+# SHRP Addon 3
+SHRP_INC_IN_REC_EXTERNAL_ADDON_3 := true
+SHRP_EXTERNAL_ADDON_3_NAME := "[MIUI] Disable Replace SHRP"
+SHRP_EXTERNAL_ADDON_3_INFO := "Flash in MIUI To Stop MIUI Recovery From Replacing"
+SHRP_EXTERNAL_ADDON_3_FILENAME := "disable-replace-shrp.zip"
+SHRP_EXTERNAL_ADDON_3_BTN_TEXT := "Flash"
+SHRP_EXTERNAL_ADDON_3_SUCCESSFUL_TEXT := "Flashed Successfully"
+
+# SHRP Addon 4
+SHRP_INC_IN_REC_EXTERNAL_ADDON_4 := true
+SHRP_EXTERNAL_ADDON_4_NAME := "Magisk-V25.2"
+SHRP_EXTERNAL_ADDON_4_INFO := "Flash It To Get Root Access"
+SHRP_EXTERNAL_ADDON_4_FILENAME := "Magisk-V25.2.zip"
+SHRP_EXTERNAL_ADDON_4_BTN_TEXT := "Flash"
+SHRP_EXTERNAL_ADDON_4_SUCCESSFUL_TEXT := "Installed"

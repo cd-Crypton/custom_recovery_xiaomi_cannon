@@ -119,4 +119,7 @@ PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
 TARGET_USES_LOGD := true
 
 # TWRP Configuration
-include $(DEVICE_PATH)/TWRPConfig.mk
+include $(DEVICE_PATH)/config/TWRPConfig.mk
+
+# SHRP Configuration
+include $(DEVICE_PATH)/config/SHRPConfig.mk
