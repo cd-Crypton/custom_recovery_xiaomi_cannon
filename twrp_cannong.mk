@@ -11,7 +11,7 @@ PRODUCT_RELEASE_NAME := $(PRODUCT_DEVICE)
 
 
 # Inherit from the Device Tree itself.
-$(call inherit-product, device/xiaomi/cannong/device.mk)
+$(call inherit-product, device/xiaomi/cannong/cannong-device.mk)
 
 # Inherit from Prebuilt Products.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
