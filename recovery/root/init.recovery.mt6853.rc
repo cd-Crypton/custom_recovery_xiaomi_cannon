@@ -81,7 +81,7 @@ service vibrator-1-3 /system/bin/hw/android.hardware.vibrator@1.3-service.mtk
 
 on property:twrp.all.users.decrypted=true
     stop teei_daemon
-    stop keymaster-4-1-beanpo
+    stop keymaster-4-1-beanpod
     stop keymaster_attestation-1-1
     stop vendor.gatekeeper-1-0
     stop thh-2-0
