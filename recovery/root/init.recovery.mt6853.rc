@@ -72,14 +72,12 @@ service gatekeeper-1-0 /system/bin/android.hardware.gatekeeper@1.0-service
     disabled
     seclabel u:r:recovery:s0
 
-on property:enable.fbe.service=0
-    stop teei_daemon
-    stop keymaster-4-1-beanpo
-    stop keymaster_attestation-1-1
-    stop vendor.gatekeeper-1-0
-    stop thh-2-0
-    stop soter-1-0
-    stop vendor.secure_element
+service vibrator-1-3 /system/bin/hw/android.hardware.vibrator@1.3-service.mtk
+    class hal
+    disabled
+    user root
+    group root
+    seclabel u:r:recovery:s0
 
 on property:twrp.all.users.decrypted=true
     stop teei_daemon
