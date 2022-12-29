@@ -14,6 +14,7 @@ TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_ABI2 := 
 TARGET_CPU_VARIANT := generic
 TARGET_CPU_VARIANT_RUNTIME := cortex-a55
+
 TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv7-a-neon
 TARGET_2ND_CPU_ABI := armeabi-v7a
@@ -23,20 +24,27 @@ TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a55
 
 # Bootloader
 TARGET_NO_BOOTLOADER := true
+PRODUCT_PLATFORM := mt6853
+TARGET_BOARD_PLATFORM := $(PRODUCT_PLATFORM)
 
 # File System
 BOARD_HAS_LARGE_FILESYSTEM := true
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 134217728
 BOARD_SYSTEMIMAGE_PARTITION_TYPE := ext4
-BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := ext4
-TARGET_USERIMAGES_USE_EXT4 := true
-TARGET_USERIMAGES_USE_F2FS := true
-
-# Workaround in case of copy error
+BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
+
+# Userimage
+TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
+TARGET_USES_MKE2FS := true
+
+# Workaround in case of copy error
 TARGET_COPY_OUT_VENDOR := vendor
 TARGET_COPY_OUT_PRODUCT := product
+
+# Block Size
+BOARD_FLASH_BLOCK_SIZE := 131072
 
 # Kernel
 BOARD_BOOTIMG_HEADER_VERSION := 2
@@ -51,10 +59,12 @@ BOARD_KERNEL_IMAGE_NAME := Image.gz
 TARGET_KERNEL_CONFIG := cannong_defconfig
 TARGET_KERNEL_SOURCE := kernel/xiaomi/cannong
 TARGET_KERNEL_CLANG_COMPILE := true
+LC_ALL="C"
 
 # Kernel Prebuilt
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/$(BOARD_KERNEL_IMAGE_NAME)
 TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
+BOARD_INCLUDE_RECOVERY_DTBO := true
 BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
 
 # Args
@@ -74,8 +84,8 @@ BOARD_AVB_RECOVERY_ROLLBACK_INDEX := 1
 BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION := 1
 
 # Partitions
-BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_USES_METADATA_PARTITION := true
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 134217728
 BOARD_SUPER_PARTITION_SIZE := 9126805504
 BOARD_SUPER_PARTITION_SYSTEM_DEVICE_SIZE := 3087618048
 BOARD_SUPER_PARTITION_GROUPS := main
@@ -83,26 +93,20 @@ BOARD_MAIN_PARTITION_LIST := system vendor product
 BOARD_MAIN_SIZE := 9122611200
 BOARD_ROOT_EXTRA_FOLDERS := bluetooth dsp firmware persist
 
-# Platform
-TARGET_BOARD_PLATFORM := mt6853
-
 # Recovery
-BOARD_INCLUDE_RECOVERY_DTBO := true
+RECOVERY_SDCARD_ON_DATA := true
+BOARD_SUPPRESS_SECURE_ERASE := true
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
-TARGET_SYSTEM_PROP := $(DEVICE_PATH)/system.prop
-TARGET_VENDOR_PROP := $(DEVICE_PATH)/vendor.prop
-TW_OVERRIDE_SYSTEM_PROPS := \
-    "ro.build.date.utc;ro.bootimage.build.date.utc=ro.build.date.utc;ro.odm.build.date.utc=ro.build.date.utc;ro.product.build.date.utc=ro.build.date.utc;ro.system.build.date.utc=ro.build.date.utc;ro.system_ext.build.date.utc=ro.build.date.utc;ro.vendor.build.date.utc=ro.build.date.utc;ro.build.product;ro.build.fingerprint=ro.system.build.fingerprint;ro.build.version.incremental;ro.product.device=ro.product.system.device;ro.product.model=ro.product.system.model;ro.product.name=ro.product.system.name"
+TARGET_SYSTEM_PROP := $(DEVICE_PATH)/props/system.prop
+TARGET_VENDOR_PROP := $(DEVICE_PATH)/props/vendor.prop
 
-# Additional binaries & libraries needed for recovery
+# Recovery Device Modules
 TARGET_RECOVERY_DEVICE_MODULES += \
+    libkeymaster4 \
+    libpuresoftkeymasterdevice \
     ashmemd_aidl_interface-cpp \
     libashmemd_client
-
-TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
-    $(TARGET_OUT_SHARED_LIBRARIES)/ashmemd_aidl_interface-cpp.so \
-    $(TARGET_OUT_SHARED_LIBRARIES)/libashmemd_client.so
 
 # Hack: prevent anti rollback
 PLATFORM_SECURITY_PATCH := 2099-12-31
@@ -111,76 +115,8 @@ BOOT_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 PLATFORM_VERSION := 99.87.36
 PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
 
-# TWRP Configuration
-TW_THEME := portrait_hdpi
-RECOVERY_SDCARD_ON_DATA := true
-TW_INCLUDE_RESETPROP := true
-TW_INCLUDE_CRYPTO := true
-TW_INCLUDE_CRYPTO_FBE := true
-TW_EXCLUDE_DEFAULT_USB_INIT := true
-TW_EXTRA_LANGUAGES := true
-TW_INCLUDE_NTFS_3G := true
-TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
-TW_MAX_BRIGHTNESS := 2047
-TW_DEFAULT_BRIGHTNESS := 900
-TW_SCREEN_BLANK_ON_BOOT := true
-TW_INCLUDE_FUSE_EXFAT := true
-TW_INCLUDE_FASTBOOTD := true
-TW_USE_FSCRYPT_POLICY := 1
-BOARD_SUPPRESS_SECURE_ERASE := true
-TARGET_USES_MKE2FS := true
-LC_ALL="C"
-TW_DEVICE_VERSION := cd-Spidey
-
 # Debugging Configs
-TWRP_INCLUDE_LOGCAT := true
 TARGET_USES_LOGD := true
 
-# SHRP Configuration
-SHRP_MAINTAINER := cd-Spidey
-SHRP_DEVICE_CODE := cannong
-SHRP_PATH := $(DEVICE_PATH)
-SHRP_REC_TYPE := Treble
-SHRP_DEVICE_TYPE := A_Only
-SHRP_NOTCH := true
-SHRP_EDL_MODE := 1
-SHRP_EXTERNAL := /external_sd
-SHRP_INTERNAL := /sdcard
-SHRP_OTG := /usb_otg
-SHRP_FLASH := 1
-SHRP_DARK := true
-SHRP_REC := /dev/block/bootdevice/by-name/recovery
-SHRP_EXPRESS := true
-
-# SHRP Addon 1
-SHRP_INC_IN_REC_EXTERNAL_ADDON_1 := true
-SHRP_EXTERNAL_ADDON_PATH := "device/xiaomi/cannong/addon/"
-SHRP_EXTERNAL_ADDON_1_NAME := "SELinux Permissiver"
-SHRP_EXTERNAL_ADDON_1_INFO := "Makes SELinux Permissive"
-SHRP_EXTERNAL_ADDON_1_FILENAME := "permissiver.zip"
-SHRP_EXTERNAL_ADDON_1_BTN_TEXT := "Flash"
-SHRP_EXTERNAL_ADDON_1_SUCCESSFUL_TEXT := "Flashed Successfully"
-
-# SHRP Addon 2
-SHRP_INC_IN_REC_EXTERNAL_ADDON_2 := true
-SHRP_EXTERNAL_ADDON_2_NAME := "SELinux Enforcer"
-SHRP_EXTERNAL_ADDON_2_INFO := "Reverts Back to Enforcing SELinux"
-SHRP_EXTERNAL_ADDON_2_FILENAME := "enforcer.zip"
-SHRP_EXTERNAL_ADDON_2_BTN_TEXT := "Flash"
-SHRP_EXTERNAL_ADDON_2_SUCCESSFUL_TEXT := "Flashed Successfully"
-
-# SHRP Addon 3
-SHRP_INC_IN_REC_EXTERNAL_ADDON_3 := true
-SHRP_EXTERNAL_ADDON_3_NAME := "[MIUI] Disable Replace SHRP"
-SHRP_EXTERNAL_ADDON_3_INFO := "Flash in MIUI To Stop MIUI Recovery From Replacing"
-SHRP_EXTERNAL_ADDON_3_FILENAME := "disable-replace-shrp.zip"
-SHRP_EXTERNAL_ADDON_3_BTN_TEXT := "Flash"
-SHRP_EXTERNAL_ADDON_3_SUCCESSFUL_TEXT := "Flashed Successfully"
-
-# SHRP Addon 4
-SHRP_INC_IN_REC_EXTERNAL_ADDON_4 := true
-SHRP_EXTERNAL_ADDON_4_NAME := "Magisk-V25.2"
-SHRP_EXTERNAL_ADDON_4_INFO := "Flash It To Get Root Access"
-SHRP_EXTERNAL_ADDON_4_FILENAME := "Magisk-V25.2.zip"
-SHRP_EXTERNAL_ADDON_4_BTN_TEXT := "Flash"
-SHRP_EXTERNAL_ADDON_4_SUCCESSFUL_TEXT := "Installed"
+# TWRP Configuration
+include $(DEVICE_PATH)/TWRPConfig.mk
