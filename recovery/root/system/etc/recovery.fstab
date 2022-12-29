@@ -2,12 +2,12 @@
 
 
 # Logical Partitions
-/system                   ext4     system                                          flags=display=system;logical
-/vendor                   ext4     vendor                                          flags=display=vendor;logical
-/product                  ext4     product                                         flags=display=product;logical
+/system                   ext4     system                                ro     wait,logical,first_stage_mount
+/vendor                   ext4     vendor                                ro     wait,logical,first_stage_mount
+/product                  ext4     product                               ro     wait,logical,first_stage_mount
 
 # Other Partitions
-/dev/block/by-name/metadata         /metadata       ext4                            noatime,nosuid,nodev,discard 											wait,check,formattable
-/dev/block/by-name/userdata         /data           f2fs                            noatime,nosuid,nodev,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt 	wait,check,formattable,resize,fileencryption=aes-256-xts:aes-256-cts:v1,quota
-/dev/block/by-name/cache            /cache          ext4                            noatime,nosuid,nodev,noauto_da_alloc,discard 																	wait,check,formattable
-/dev/block/by-name/misc             /misc           emmc                            flags=display=misc
+/dev/block/by-name/metadata         /metadata       ext4                 noatime,nosuid,nodev,discard 											wait,check,formattable
+/dev/block/by-name/userdata         /data           f2fs                 noatime,nosuid,nodev,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt 	wait,check,formattable,resize,fileencryption=aes-256-xts:aes-256-cts:v1,quota
+/dev/block/by-name/cache            /cache          ext4                 noatime,nosuid,nodev,noauto_da_alloc,discard 									wait,check,formattable
+/dev/block/by-name/misc             /misc           emmc                 defaults             defaults
