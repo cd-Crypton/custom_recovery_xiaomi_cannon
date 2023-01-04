@@ -9,10 +9,13 @@ on init
     export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
 
 on fs
-    install key_ring
+    install keyring
+    installkey /data
 
 on post-fs
     start boot-hal-1-1
+    class_start early_hal
+    exec -- /system/bin/fsverity_init --load-verified-keys
     
 on boot
     start vibrator-1-3
@@ -20,7 +23,6 @@ on boot
     setprop sys.usb.config adb
 
 on property:ro.crypto.state=encrypted && property:ro.crypto.type=file
-    install_keyring
     start teei_daemon
     setprop crypto.ready 1
 
