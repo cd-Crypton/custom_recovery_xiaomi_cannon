@@ -1,5 +1,3 @@
-# MT6853, remove unncessary supports
-
 import /init.recovery.microtrust.rc
 
 on init
