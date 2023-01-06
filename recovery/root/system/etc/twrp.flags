@@ -1,9 +1,9 @@
 # Mount Point             FSType   Device1                Device2                  Flags
-/nvdata                   ext4     /dev/block/by-name/nvdata                       flags=backup=1;display=nvram
+/nvdata                   ext4     /dev/block/by-name/nvdata                       flags=backup=1;display="NVData";flashimg=1
 /nvcfg                    ext4     /dev/block/by-name/nvcfg   
-/persist                  ext4     /dev/block/by-name/persist                      flags=backup=1;display=persist;flashimg=1
-/persistent               emmc     /dev/block/by-name/frp                          flags=backup=1;display=persistent;flashimg=1
-/nvram                    emmc     /dev/block/by-name/nvram                        flags=backup=1;display=nvram;flashimg=1
+/persist                  ext4     /dev/block/by-name/persist                      flags=backup=1;display="Persist";flashimg=1
+/persistent               emmc     /dev/block/by-name/frp                          flags=backup=1;display="Persisten";flashimg=1
+/nvram                    emmc     /dev/block/by-name/nvram                        flags=backup=1;display="NVRam";flashimg=1
 
 /cache                    ext4     /dev/block/by-name/cache
 /logo                     emmc     /dev/block/by-name/logo         
